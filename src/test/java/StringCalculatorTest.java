@@ -19,7 +19,16 @@ class StringCalculatorTest {
         assertEquals(0,stringCalculator.add(""),"“” == 0");
         assertEquals(1,stringCalculator.add("1"),"“1” == 1");
         assertEquals(8,stringCalculator.add("1,2,5"),"“1,2” == 3");
+
     }
 
+
+    @Test
+    @DisplayName("Add using new line")
+    void addUsingNewLineTest() {
+        assertEquals(4,stringCalculator.add("1\n1,2"));
+        assertEquals(0,stringCalculator.add("5\n,5"));
+        assertEquals(0,stringCalculator.add("5,\n5"));
+    }
 
 }
