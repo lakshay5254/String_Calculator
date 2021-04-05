@@ -25,29 +25,26 @@ public class StringCalculator {
                 throw new InvalidParameterException("Negative numbers "+i+" not allowed");
             }else if (numbers.startsWith("//")){
 
-
                 String delimiter= Character.toString(numbers.charAt(2));
                 String[] sequence=numbers.substring(4).split(delimiter);
-                int[] seq=Arrays.stream(sequence).mapToInt(Integer::parseInt).filter(a->a<1000).toArray();
 
-                if (seq.length == 1) {
-                    return seq[0];
-                } else {
-                    return Arrays.stream(seq).sum();
-                }
+                return returnSum(sequence);
 
             }else {
                 String[] sequence = numbers.split("\n|,");
-                int[] seq=Arrays.stream(sequence).mapToInt(Integer::parseInt).filter(a->a<1000).toArray();
 
-
-                if (seq.length == 1) {
-                    return seq[0];
-                } else {
-                    return Arrays.stream(seq).sum();
-                }
+                return returnSum(sequence);
             }
 
+        }
+    }
+
+    public int returnSum(String[] sequence){
+        int[] seq=Arrays.stream(sequence).mapToInt(Integer::parseInt).filter(a->a<1000).toArray();
+        if (seq.length == 1) {
+            return seq[0];
+        } else {
+            return Arrays.stream(seq).sum();
         }
     }
 }
