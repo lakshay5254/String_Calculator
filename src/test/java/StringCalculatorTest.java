@@ -46,4 +46,11 @@ class StringCalculatorTest {
         assertThrows(InvalidParameterException.class,()->stringCalculator.add("-5,1,-1"));
     }
 
+    @Test
+    @DisplayName("Numbers bigger than 1000 ignored")
+    void numberBiggerTest(){
+        assertEquals(22,stringCalculator.add("22,1001"));
+    }
+
+
 }
