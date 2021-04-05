@@ -1,22 +1,31 @@
+import java.security.InvalidParameterException;
 import java.util.Arrays;
 
 
 public class StringCalculator {
 
     public int add(String numbers){
+
         if (numbers.equals("")){
             return 0;
         }else{
-            if(numbers.matches(".*\\n,.*") || numbers.matches(".*,\\n.*")){
-                System.out.println("Invalid input");
-                return 0;
-            }
-            String[] a=numbers.split("\n|,");
-            if (a.length==1){
-                return Integer.parseInt(a[0]);
+            if(numbers.contains("\n,") || numbers.contains(",\n")){
+                throw  new InvalidParameterException("Invalid input");
+            }else if (numbers.startsWith("//")){
+
+                String delimiter= Character.toString(numbers.charAt(2));
+                String[] sequence=numbers.substring(4).split(delimiter);
+                return Arrays.stream(sequence).mapToInt(Integer::parseInt).sum();
+
             }else {
-                return Arrays.stream(a).mapToInt(Integer::parseInt).sum();
+                    String[] sequence = numbers.split("\n|,");
+                    if (sequence.length == 1) {
+                        return Integer.parseInt(sequence[0]);
+                    } else {
+                        return Arrays.stream(sequence).mapToInt(Integer::parseInt).sum();
+                    }
             }
+
         }
     }
 }
