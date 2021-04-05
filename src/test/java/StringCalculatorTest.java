@@ -31,7 +31,19 @@ class StringCalculatorTest {
         assertEquals(4,stringCalculator.add("1\n1,2"));
         assertThrows(InvalidParameterException.class,()->stringCalculator.add("5\n,5"));
         assertThrows(InvalidParameterException.class,()->stringCalculator.add("5,\n5"));
+
+    }
+
+    @Test
+    @DisplayName("Any delimiter allowed")
+    void  anyDelimeterTest(){
         assertEquals(5,stringCalculator.add("//;\n1;4"));
+    }
+
+    @Test
+    @DisplayName("Negative numbers not allowed")
+    void negativeNumbersTest(){
+        assertThrows(InvalidParameterException.class,()->stringCalculator.add("-5,1,-1"));
     }
 
 }
