@@ -3,6 +3,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.security.InvalidParameterException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class StringCalculatorTest {
@@ -27,8 +29,9 @@ class StringCalculatorTest {
     @DisplayName("Add using new line")
     void addUsingNewLineTest() {
         assertEquals(4,stringCalculator.add("1\n1,2"));
-        assertEquals(0,stringCalculator.add("5\n,5"));
-        assertEquals(0,stringCalculator.add("5,\n5"));
+        assertThrows(InvalidParameterException.class,()->stringCalculator.add("5\n,5"));
+        assertThrows(InvalidParameterException.class,()->stringCalculator.add("5,\n5"));
+        assertEquals(5,stringCalculator.add("//;\n1;4"));
     }
 
 }
