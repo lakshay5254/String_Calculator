@@ -52,5 +52,12 @@ class StringCalculatorTest {
         assertEquals(22,stringCalculator.add("22,1001"));
     }
 
+    @Test
+    @DisplayName("Delimiters can be of any length")
+    void anyLengthTest(){
+        assertEquals(4,stringCalculator.add("//[**]\n2**2"));
+        assertEquals(7,stringCalculator.add("//[**]\n2**2**3"));
+    }
+
 
 }

@@ -24,9 +24,20 @@ public class StringCalculator {
 
                 throw new InvalidParameterException("Negative numbers "+i+" not allowed");
             }else if (numbers.startsWith("//")){
+                String delimiter="";
+                String[] sequence=new String[numbers.length()];
+                if (numbers.startsWith("//[")){
+                    int i=4;
+                    while (numbers.charAt(i)==numbers.charAt(3)){
+                        i++;
+                    }
+                    delimiter= numbers.substring(3,i);
+                    sequence=numbers.substring(i+2).split(Pattern.quote(delimiter));
 
-                String delimiter= Character.toString(numbers.charAt(2));
-                String[] sequence=numbers.substring(4).split(delimiter);
+                }else{
+                    delimiter= Character.toString(numbers.charAt(2));
+                    sequence=numbers.substring(4).split(Pattern.quote(delimiter));
+                }
 
                 return returnSum(sequence);
 
